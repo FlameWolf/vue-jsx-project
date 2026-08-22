@@ -32,7 +32,7 @@ export default function ConfirmDialogue() {
 						<p class="confirm-message">{state.value.message}</p>
 						<div class="confirm-actions">
 							<button type="button" class="btn btn-outline-secondary" onClick={onCancel}>{state.value.cancelText}</button>
-							<button type="button" class={`btn btn-${state.value.variant}`} onClick={onConfirm} autofocus={true}>{state.value.confirmText}</button>
+							<button type="button" class={["btn", { [`btn-${state.value.variant}`]: true }]} onClick={onConfirm} autofocus={true}>{state.value.confirmText}</button>
 						</div>
 					</div>
 				</div>

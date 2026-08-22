@@ -11,7 +11,7 @@ export default function NotificationList() {
 				<VaporFor in={sortedNotifications.value}>
 					{(notification: Notification) => (
 						<Fragment key={notification.id}>
-							<div class={`alert alert-${notification.type} m-0 ms-auto`} role="alert">
+							<div class={["alert m-0 ms-auto", { [`alert-${notification.type}`]: true }]} role="alert">
 								<div class="d-flex">
 									<div v-html={notification.message}></div>
 									<button class="btn-close ms-2" onClick={() => removeNotification(notification.id)} aria-label="Close"></button>
