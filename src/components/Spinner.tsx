@@ -4,11 +4,10 @@ type Props = {
 	message?: string;
 	minimal?: boolean;
 	showMessage?: boolean;
-	tag?: string;
+	tag?: keyof HTMLElementTagNameMap;
 };
 
 export default function Spinner(props: Props) {
-	const minimalProps = { class: "spinner-border spinner-border-sm", role: "status" };
 	const showMessage = computed(() => props.showMessage ?? true);
 	const tag = computed(() => props.tag ?? "div");
 
@@ -20,7 +19,7 @@ export default function Spinner(props: Props) {
 					<div v-if={showMessage.value} class="mt-3" role="status">{props.message ?? "Loading..."}</div>
 				</div>
 			</Fragment>
-			<tag.value v-else {...minimalProps}></tag.value>
+			<tag.value v-else class="spinner-border spinner-border-sm" role="status"></tag.value>
 		</>
 	);
 }

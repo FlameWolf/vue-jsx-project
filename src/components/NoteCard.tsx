@@ -41,7 +41,7 @@ export default function NoteCard(props: Props, { emit }: SetupContext<Events>) {
 
 	return (
 		<>
-			<RouterLink to={`/notes/${note.value.id}`} class={["card note-card text-decoration-none position-relative", { ...colourClass, selected: props.selectionMode && props.selected }]} onClickCapture={handleClick}>
+			<RouterLink to={`/notes/${note.value.id}`} class={["card note-card text-decoration-none position-relative", { ...colourClass, selected: props.selectionMode && props.selected }]} onClick_capture={handleClick}>
 				<div v-if={note.value.pinnedAt || note.value.favedAt} class="d-flex gap-2 small position-absolute top-0 p-2 status-badge">
 					<Icon v-if={note.value.pinnedAt} type="pinAngleFill"/>
 					<Icon v-if={note.value.favedAt} type="starFill"/>

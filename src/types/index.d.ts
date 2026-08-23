@@ -1,9 +1,9 @@
 global {
 	declare module "@vue/runtime-core" {
-		type CaptureEvent = `on${string}Capture`;
-
+		type CaptureEvent = `on${Capitalize<string>}_capture`;
+		type NativeEventHandler = (e: Event | undefined) => any;
 		interface ComponentCustomProps {
-			[key: CaptureEvent]: (e?: Event) => any;
+			[key: CaptureEvent]: NativeEventHandler;
 		}
 	}
 }
