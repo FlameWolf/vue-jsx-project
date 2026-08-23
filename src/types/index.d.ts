@@ -1,3 +1,13 @@
+global {
+	declare module "@vue/runtime-core" {
+		type CaptureEvent = `on${string}Capture`;
+
+		interface ComponentCustomProps {
+			[key: CaptureEvent]: (e?: Event) => any;
+		}
+	}
+}
+
 interface KVSchema {
 	"google-access-token": string;
 	"google-token-expires-at": number;

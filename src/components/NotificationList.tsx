@@ -1,6 +1,6 @@
 import { computed, Fragment, ref } from "vue";
 import { VaporFor } from "vue-jsx-vapor";
-import { notifications, removeNotification, type Notification } from "@/stores/notifications";
+import { notifications, removeNotification } from "@/stores/notifications";
 
 export default function NotificationList() {
 	const sortedNotifications = computed(() => notifications.value.toSorted((a, b) => b.timeStamp - a.timeStamp));
@@ -9,7 +9,7 @@ export default function NotificationList() {
 		<>
 			<div class="d-flex flex-column gap-2 notification-list position-fixed end-0 bottom-0 me-2 mb-2">
 				<VaporFor in={sortedNotifications.value}>
-					{(notification: Notification) => (
+					{notification => (
 						<Fragment key={notification.id}>
 							<div class={["alert m-0 ms-auto", { [`alert-${notification.type}`]: true }]} role="alert">
 								<div class="d-flex">

@@ -1,7 +1,7 @@
 import { readonly, ref } from "vue";
 import type { UUID } from "crypto";
 
-export type Notification = {
+type Notification = {
 	id: UUID;
 	type: "success" | "info" | "warning" | "danger";
 	timeStamp: number;

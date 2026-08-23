@@ -12,6 +12,16 @@
 		},
 		"lib": ["esnext", "dom"],
 		"types": ["node"],
+		"typeRoots": ["./types", "./node_modules/@types"],
+		"module": "preserve",
+		"moduleResolution": "bundler",
+		"jsx": "preserve",
+		"jsxImportSource": "vue-jsx-vapor",
+		"composite": true,
+		"emitDeclarationOnly": true,
+		"allowImportingTsExtensions": true,
+		"rewriteRelativeImportExtensions": true,
+		"verbatimModuleSyntax": true,
 
 		// `vue-tsc --build` produces a .tsbuildinfo file for incremental type-checking.
 		// Specified here to keep it out of the root directory.
