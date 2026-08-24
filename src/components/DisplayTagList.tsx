@@ -22,7 +22,7 @@ type Props = {
 	showFilterType?: boolean;
 };
 type Events = {
-	selectionChanged: [tags: string[]];
+	selectionChanged: (tags: string[]) => void;
 };
 
 export default function DisplayTagList(props: Props & EventBindings<Events>, { emit }: SetupContext<Events>) {
@@ -226,7 +226,7 @@ export default function DisplayTagList(props: Props & EventBindings<Events>, { e
 							</template>
 							<div class="d-flex gap-2 px-3 py-1">
 								<div class={["flex-nowrap w-100", { [`input-group`]: props.allowCreate }]}>
-									<input ref="tag-input" v-model_trim={searchText} type="text" class="form-control form-control-sm" placeholder="Search"/>
+									<input ref="tag-input" value={searchText.value} type="text" class="form-control form-control-sm" placeholder="Search" onInput={e => searchText.value = e.currentTarget.value.trim()}/>
 									<button v-if={props.allowCreate} class="btn btn-sm btn-outline-secondary" disabled={hasExactMatch.value} onClick={() => createTag(searchText.value)}>
 										<Icon type="plusLg"/>
 									</button>
