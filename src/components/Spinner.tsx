@@ -1,4 +1,4 @@
-import { computed, Fragment } from "vue";
+import { computed } from "vue";
 
 type Props = {
 	message?: string;
@@ -13,12 +13,12 @@ export default function Spinner(props: Props) {
 
 	return (
 		<>
-			<Fragment v-if={!props.minimal}>
+			<template v-if={!props.minimal}>
 				<div class={["d-flex flex-column justify-content-center align-items-center", { [`py-3`]: !showMessage.value }]}>
 					<div class="spinner-border" aria-hidden="true" aria-label={showMessage.value ? undefined : props.message}></div>
 					<div v-if={showMessage.value} class="mt-3" role="status">{props.message ?? "Loading..."}</div>
 				</div>
-			</Fragment>
+			</template>
 			<tag.value v-else class="spinner-border spinner-border-sm" role="status"></tag.value>
 		</>
 	);
