@@ -1,4 +1,4 @@
-import { onBeforeUnmount, onMounted, Transition, withModifiers } from "vue";
+import { onBeforeUnmount, onMounted, VaporTransition, withModifiers } from "vue";
 import { onCancel, onConfirm, state } from "@/composables/useConfirmDialogue";
 
 const handlers: Record<string, (() => void) | undefined> = {
@@ -25,7 +25,7 @@ export default function ConfirmDialogue() {
 
 	return (
 		<>
-			<Transition name="confirm-fade">
+			<VaporTransition name="confirm-fade">
 				<div v-if={state.value.visible} class="confirm-overlay" onClick={withModifiers(onCancel, ["self"])}>
 					<div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="`confirm-title`">
 						<h5 id="confirm-title" class="confirm-title">{state.value.title}</h5>
@@ -36,7 +36,7 @@ export default function ConfirmDialogue() {
 						</div>
 					</div>
 				</div>
-			</Transition>
+			</VaporTransition>
 		</>
 	);
 }
