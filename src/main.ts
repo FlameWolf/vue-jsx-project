@@ -1,4 +1,4 @@
-import { ensurePersistentStorage } from "@/storage/persistence.ts";
+import { ensurePersistentStorage } from "@/storage/persistence";
 import { runMigration } from "@/storage/migrate";
 import { registerServiceWorker } from "@/registerServiceWorker";
 import { createVaporApp } from "vue";
