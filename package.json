@@ -11,6 +11,7 @@
 		"type-check": "vue-tsc --build"
 	},
 	"dependencies": {
+		"@fullhuman/postcss-purgecss": "^8.0.0",
 		"bootstrap": "^5.3.8",
 		"idb": "^8.0.3",
 		"vue": "rc",
