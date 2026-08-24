@@ -4,12 +4,13 @@ global {
 		type NativeEventHandler = (e: Event | undefined) => any;
 		interface ComponentCustomProps {
 			[key: CaptureEvent]: NativeEventHandler;
+			title?: string;
 		}
 	}
 }
 
 type EventBindings<T extends Record<string, unknown>> = {
-	[K in keyof T as `on${Capitalize<string & K>}`]: T[K];
+	[K in keyof T as `on${Capitalize<string & K>}`]?: T[K];
 };
 
 interface KVSchema {
