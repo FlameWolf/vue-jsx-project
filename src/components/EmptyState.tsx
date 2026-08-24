@@ -21,7 +21,7 @@ export default function EmptyState(props: Props & EventBindings<Events>, { emit 
 					</svg>
 				</div>
 				<p class="text-muted mb-3">{props.message}</p>
-				<div v-if="props.showActions" class="d-flex flex-column gap-2 align-items-center">
+				<div v-if={props.showActions} class="d-flex flex-column gap-2 align-items-center">
 					<div class="d-flex gap-2 justify-content-center flex-wrap">
 						<RouterLink to="/notes/new" class="btn btn-primary">Create a note</RouterLink>
 						<button class="btn btn-outline-secondary" onClick={() => emit(`import`)}>Import from files</button>
