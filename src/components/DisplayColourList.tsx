@@ -1,8 +1,8 @@
+import { VaporFor } from "vue-jsx-vapor";
 import { colours } from "@/constants/colours";
 import * as notesStore from "@/stores/notes";
 import Icon from "@/components/Icon";
 import type { SetupContext } from "vue";
-import { VaporFor } from "vue-jsx-vapor";
 
 type Props = {
 	filterMode?: boolean;
@@ -12,7 +12,7 @@ type Events = {
 	selectionChanged: (colour: Colour) => void;
 };
 
-export default function DisplayColourList(props: Props, { emit }: SetupContext<Events>) {
+export default function DisplayColourList(props: Props & EventBindings<Events>, { emit }: SetupContext<Events>) {
 	function isActive(colour: Colour) {
 		if (props.filterMode) {
 			return notesStore.searchColours.value.has(colour);

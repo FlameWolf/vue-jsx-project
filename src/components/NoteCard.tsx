@@ -14,7 +14,7 @@ type Props = {
 };
 type Events = { toggleSelect: (id: UUID) => void };
 
-export default function NoteCard(props: Props, { emit }: SetupContext<Events>) {
+export default function NoteCard(props: Props & EventBindings<Events>, { emit }: SetupContext<Events>) {
 	const note = computed(() => props.note);
 	const colourClass = computed(() => (note.value.colour ? { [`bg-${note.value.colour}`]: true } : {}));
 

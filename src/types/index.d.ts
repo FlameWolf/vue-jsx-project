@@ -8,6 +8,10 @@ global {
 	}
 }
 
+type EventBindings<T extends Record<string, unknown>> = {
+	[K in keyof T as `on${Capitalize<string & K>}`]: T[K];
+};
+
 interface KVSchema {
 	"google-access-token": string;
 	"google-token-expires-at": number;

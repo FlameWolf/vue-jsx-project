@@ -10,7 +10,7 @@ type Events = {
 	import: () => void;
 };
 
-export default function EmptyState(props: Props, { emit }: SetupContext<Events>) {
+export default function EmptyState(props: Props & EventBindings<Events>, { emit }: SetupContext<Events>) {
 	return (
 		<>
 			<div class="empty-state text-center py-5">

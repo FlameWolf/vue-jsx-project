@@ -12,7 +12,7 @@ type Events = {
 	toggleDirection: () => void;
 };
 
-export default function SortControls(props: Props, { emit }: SetupContext<Events>) {
+export default function SortControls(props: Props & EventBindings<Events>, { emit }: SetupContext<Events>) {
 	const isAscending = computed(() => props.sortOrder === "asc");
 
 	function onSortFieldChange(e: ChangeEvent) {
