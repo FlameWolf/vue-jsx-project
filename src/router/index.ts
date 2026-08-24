@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
-// import DisplayNoteList from "@/components/DisplayNoteList.vue";
-// import EditNote from "@/components/EditNote.vue";
+import DisplayNoteList from "@/components/DisplayNoteList";
+import EditNote from "@/components/EditNote";
 
 declare module "vue-router" {
 	interface RouteMeta {
@@ -15,46 +15,46 @@ const scrollPositions = new Map<string, number>();
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
-		// { path: "/", redirect: "/notes" },
-		// { path: "/favourite", redirect: "/notes/favourite" },
-		// { path: "/archive", redirect: "/notes/archive" },
-		// { path: "/trash", redirect: "/notes/trash" },
-		// {
-		// 	path: "/notes",
-		// 	component: DisplayNoteList,
-		// 	props: {
-		// 		view: "active"
-		// 	}
-		// },
-		// {
-		// 	path: "/notes/favourite",
-		// 	component: DisplayNoteList,
-		// 	props: {
-		// 		view: "favourited"
-		// 	}
-		// },
-		// {
-		// 	path: "/notes/archive",
-		// 	component: DisplayNoteList,
-		// 	props: {
-		// 		view: "archived"
-		// 	}
-		// },
-		// {
-		// 	path: "/notes/trash",
-		// 	component: DisplayNoteList,
-		// 	props: {
-		// 		view: "trash"
-		// 	}
-		// },
-		// { path: "/notes/new", component: EditNote },
-		// {
-		// 	path: "/notes/:id",
-		// 	component: EditNote,
-		// 	props: route => Object.assign(route.params, { backRoute: route.meta.fromPath })
-		// },
-		// { path: "/privacy", component: () => import("@/components/PrivacyPolicy.vue") },
-		// { path: "/terms", component: () => import("@/components/TermsOfService.vue") }
+		{ path: "/", redirect: "/notes" },
+		{ path: "/favourite", redirect: "/notes/favourite" },
+		{ path: "/archive", redirect: "/notes/archive" },
+		{ path: "/trash", redirect: "/notes/trash" },
+		{
+			path: "/notes",
+			component: DisplayNoteList,
+			props: {
+				view: "active"
+			}
+		},
+		{
+			path: "/notes/favourite",
+			component: DisplayNoteList,
+			props: {
+				view: "favourited"
+			}
+		},
+		{
+			path: "/notes/archive",
+			component: DisplayNoteList,
+			props: {
+				view: "archived"
+			}
+		},
+		{
+			path: "/notes/trash",
+			component: DisplayNoteList,
+			props: {
+				view: "trash"
+			}
+		},
+		{ path: "/notes/new", component: EditNote },
+		{
+			path: "/notes/:id",
+			component: EditNote,
+			props: route => Object.assign(route.params, { backRoute: route.meta.fromPath })
+		},
+		{ path: "/privacy", component: () => import("@/components/PrivacyPolicy") },
+		{ path: "/terms", component: () => import("@/components/TermsOfService") }
 	]
 });
 router.beforeEach((to, from) => {
