@@ -18,7 +18,7 @@
 		"jszip": "^3.10.1",
 		"vue": "rc",
 		"vue-jsx-vapor": "^3.2.21",
-		"vue-router": "^5.2.0"
+		"vue-router": "https://pkg.pr.new/vue-router@2509"
 	},
 	"devDependencies": {
 		"@types/node": "^24.13.3",

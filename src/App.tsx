@@ -1,6 +1,6 @@
 import "@/styles.css";
 import { onMounted } from "vue";
-import { RouterLink, RouterView } from "vue-router";
+import { VaporRouterLink, VaporRouterView } from "vue-router";
 import { currentColour } from "@/stores/app";
 import { isLoading, hydrateNotes } from "@/stores/notes";
 import { isNavigating } from "@/router";
@@ -24,9 +24,9 @@ export default function App() {
 		<>
 			<nav class="navbar navbar-expand bg-body-tertiary border-bottom px-2">
 				<div class="container gap-2">
-					<RouterLink to="/notes" class="navbar-brand">
+					<VaporRouterLink to="/notes" class="navbar-brand">
 						<img class="logo" src="/logo.svg" alt="QuickPad Logo"/>
-					</RouterLink>
+					</VaporRouterLink>
 					<SearchBar/>
 					<div class="d-flex align-items-center gap-2">
 						<SyncControls/>
@@ -34,15 +34,15 @@ export default function App() {
 					</div>
 				</div>
 			</nav>
-			<main class={["flex-grow-1 container px-2 py-4", { [`bg-${currentColour}`]: !!currentColour }]}>
-				<Spinner v-if={isLoading} message="Loading notes..."/>
-				<RouterView v-else/>
+			<main class={["flex-grow-1 container px-2 py-4", { [`bg-${currentColour.value}`]: !!currentColour.value }]}>
+				<Spinner v-if={isLoading.value} message="Loading notes..."/>
+				<VaporRouterView v-else/>
 			</main>
 			<footer class="bg-body-tertiary border-top">
 				<div class="d-flex flex-wrap justify-content-center align-items-center gap-3 small text-muted px-2 py-3">
 					<span>QuickPad</span>
-					<RouterLink to="/privacy" class="link-secondary text-decoration-none">Privacy Policy</RouterLink>
-					<RouterLink to="/terms" class="link-secondary text-decoration-none">Terms of Service</RouterLink>
+					<VaporRouterLink to="/privacy" class="link-secondary text-decoration-none">Privacy Policy</VaporRouterLink>
+					<VaporRouterLink to="/terms" class="link-secondary text-decoration-none">Terms of Service</VaporRouterLink>
 					<a target="_blank" href="https://github.com/FlameWolf/quick-pad" class="icon-link link-secondary text-decoration-none">
 						<Icon type="codeSlash"/>
 						<span>Source</span>
@@ -52,7 +52,7 @@ export default function App() {
 			<ScrollButtons/>
 			<NotificationList/>
 			<ConfirmDialogue/>
-			<div v-if={isNavigating} class="nav-overlay"></div>
+			<div v-if={isNavigating.value} class="nav-overlay"></div>
 		</>
 	);
 }

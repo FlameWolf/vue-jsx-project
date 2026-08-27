@@ -1,6 +1,6 @@
 import { computed, template } from "vue";
 import { VaporFor } from "vue-jsx-vapor";
-import { RouterLink } from "vue-router";
+import { VaporRouterLink } from "vue-router";
 import Icon from "@/components/Icon";
 
 type Props = {
@@ -19,10 +19,10 @@ export default function LegalPage(props: Props) {
 		<>
 			<div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
 				<h2 class="mb-0">{props.title}</h2>
-				<RouterLink to="/notes" class="btn btn-secondary btn-sm">
+				<VaporRouterLink to="/notes" class="btn btn-secondary btn-sm">
 					<Icon type="chevronLeft"/>
 					<span class="ms-2">Back to Notes</span>
-				</RouterLink>
+				</VaporRouterLink>
 			</div>
 			<article class="legal-content mx-auto">
 				<p class="text-muted small mb-4">Last updated: {props.effectiveDate}</p>

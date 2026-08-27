@@ -1,5 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from "vue";
-import { onBeforeRouteLeave, RouterLink, useRoute, useRouter } from "vue-router";
+import { onBeforeRouteLeave, VaporRouterLink, useRoute, useRouter } from "vue-router";
 import { emptyString } from "@/constants/common";
 import { areArraysEqual, areSetsEqual, copyNullableArray } from "@/utils/common";
 import { getSentenceCount, getWordCount, getCharacterCount } from "@/utils/text-analysis";
@@ -421,10 +421,10 @@ export default function EditNote(props: Props) {
 	return (
 		<>
 			<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-				<RouterLink to={backRoute.value} class="btn btn-secondary btn-sm" aria-label="Back to notes">
+				<VaporRouterLink to={backRoute.value} class="btn btn-secondary btn-sm" aria-label="Back to notes">
 					<Icon type="chevronLeft"/>
 					<span class="ms-2">Back</span>
-				</RouterLink>
+				</VaporRouterLink>
 				<div class="d-flex flex-wrap gap-2 ms-auto">
 					<button class="btn btn-outline-secondary btn-sm" onClick={() => setFontScaling(`+`)} title="Increase font size" aria-label="Increase font size">
 						<Icon type="aPlus"/>

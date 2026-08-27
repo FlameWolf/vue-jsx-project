@@ -1,6 +1,6 @@
 import { computed, onMounted, useTemplateRef, watch } from "vue";
 import { VaporFor } from "vue-jsx-vapor";
-import { onBeforeRouteLeave, RouterLink } from "vue-router";
+import { onBeforeRouteLeave, VaporRouterLink } from "vue-router";
 import { bulkActions } from "@/constants/actions";
 import { colours } from "@/constants/colours";
 import * as appStore from "@/stores/app";
@@ -288,10 +288,10 @@ export default function DisplayNoteList(props: Props) {
 		<>
 			<div v-if={view.value !== `active`} class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
 				<h2 class="mb-0">{pageTitle}</h2>
-				<RouterLink to="/notes" class="btn btn-secondary btn-sm">
+				<VaporRouterLink to="/notes" class="btn btn-secondary btn-sm">
 					<Icon type="chevronLeft"/>
 					<span class="ms-2">Back to Notes</span>
-				</RouterLink>
+				</VaporRouterLink>
 			</div>
 			<Spinner v-if={notesStore.isLoading.value || notesStore.isSearching.value} message={notesStore.isSearching.value ? `Searching...` : `Loading notes...`}/>
 			<EmptyState v-else-if={!(hasNotes.value || notesStore.searchTags.value.size || notesStore.searchColours.value.size)} message={emptyMessage.value} showActions={view.value === `active` && !isSearchMode.value} onImport={handleImport}/>
@@ -325,18 +325,18 @@ export default function DisplayNoteList(props: Props) {
 								<Icon type="boxArrowUpRight"/>
 								<span class="d-none d-sm-inline ms-2">Export All</span>
 							</button>
-							<RouterLink to="/notes/favourite" class="btn btn-outline-secondary btn-sm" title="Favourited" aria-label="Favourited">
+							<VaporRouterLink to="/notes/favourite" class="btn btn-outline-secondary btn-sm" title="Favourited" aria-label="Favourited">
 								<Icon type="star"/>
 								<span class="d-none d-sm-inline ms-2">Favourited</span>
-							</RouterLink>
-							<RouterLink to="/notes/archive" class="btn btn-outline-secondary btn-sm" title="Archived" aria-label="Archived">
+							</VaporRouterLink>
+							<VaporRouterLink to="/notes/archive" class="btn btn-outline-secondary btn-sm" title="Archived" aria-label="Archived">
 								<Icon type="archive"/>
 								<span class="d-none d-sm-inline ms-2">Archived</span>
-							</RouterLink>
-							<RouterLink to="/notes/trash" class="btn btn-outline-secondary btn-sm" title="Trash" aria-label="Trash">
+							</VaporRouterLink>
+							<VaporRouterLink to="/notes/trash" class="btn btn-outline-secondary btn-sm" title="Trash" aria-label="Trash">
 								<Icon type="trash"/>
 								<span class="d-none d-sm-inline ms-2">Trash</span>
-							</RouterLink>
+							</VaporRouterLink>
 						</template>
 						<template v-if={view.value === `trash`}>
 							<button class="btn btn-outline-danger btn-sm" onClick={handleEmptyTrash} title="Empty Trash" aria-label="Empty Trash">
@@ -359,11 +359,11 @@ export default function DisplayNoteList(props: Props) {
 								<div class="flex-grow-1 border-bottom"></div>
 							</div>
 							<div class="notes-grid">
-								<RouterLink v-if={section.showNewCard && !isSelecting.value} to="/notes/new" class="card note-card new-note-card text-decoration-none">
+								<VaporRouterLink v-if={section.showNewCard && !isSelecting.value} to="/notes/new" class="card note-card new-note-card text-decoration-none">
 									<div class="card-body d-flex align-items-center justify-content-center">
 										<span class="fs-1 text-muted">+</span>
 									</div>
-								</RouterLink>
+								</VaporRouterLink>
 								<VaporFor in={section.notes}>{note => <NoteCard key={note.id} note={note} selectionMode={isSelecting.value} selected={isSelected(note.id)} onToggleSelect={toggleSelection}/>}</VaporFor>
 							</div>
 						</template>

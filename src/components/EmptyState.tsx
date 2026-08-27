@@ -1,4 +1,4 @@
-import { RouterLink } from "vue-router";
+import { VaporRouterLink } from "vue-router";
 import Icon from "@/components/Icon";
 import type { SetupContext } from "vue";
 
@@ -23,18 +23,18 @@ export default function EmptyState(props: Props & EventBindings<Events>, { emit 
 				<p class="text-muted mb-3">{props.message}</p>
 				<div v-if={props.showActions} class="d-flex flex-column gap-2 align-items-center">
 					<div class="d-flex gap-2 justify-content-center flex-wrap">
-						<RouterLink to="/notes/new" class="btn btn-primary">Create a note</RouterLink>
+						<VaporRouterLink to="/notes/new" class="btn btn-primary">Create a note</VaporRouterLink>
 						<button class="btn btn-outline-secondary" onClick={() => emit(`import`)}>Import from files</button>
 					</div>
 					<div class="d-flex gap-3 justify-content-center flex-wrap">
-						<RouterLink to="/notes/archive" class="btn btn-link btn-sm text-decoration-none">
+						<VaporRouterLink to="/notes/archive" class="btn btn-link btn-sm text-decoration-none">
 							<Icon type="archive"/>
 							<span class="ms-2">Archived</span>
-						</RouterLink>
-						<RouterLink to="/notes/trash" class="btn btn-link btn-sm text-decoration-none">
+						</VaporRouterLink>
+						<VaporRouterLink to="/notes/trash" class="btn btn-link btn-sm text-decoration-none">
 							<Icon type="trash"/>
 							<span class="ms-2">Trash</span>
-						</RouterLink>
+						</VaporRouterLink>
 					</div>
 				</div>
 			</div>

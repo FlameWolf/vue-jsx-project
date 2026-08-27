@@ -1,6 +1,6 @@
 import { computed, withModifiers, type SetupContext } from "vue";
 import { VaporFor } from "vue-jsx-vapor";
-import { RouterLink } from "vue-router";
+import { VaporRouterLink } from "vue-router";
 import { emptyString } from "@/constants/common";
 import * as notesStore from "@/stores/notes";
 import Icon from "@/components/Icon";
@@ -41,7 +41,7 @@ export default function NoteCard(props: Props & EventBindings<Events>, { emit }:
 
 	return (
 		<>
-			<RouterLink to={`/notes/${note.value.id}`} class={["card note-card text-decoration-none position-relative", { ...colourClass, selected: props.selectionMode && props.selected }]} onClick_capture={handleClick}>
+			<VaporRouterLink to={`/notes/${note.value.id}`} class={["card note-card text-decoration-none position-relative", { ...colourClass, selected: props.selectionMode && props.selected }]} onClick_capture={handleClick}>
 				<div v-if={note.value.pinnedAt || note.value.favedAt} class="d-flex gap-2 small position-absolute top-0 p-2 status-badge">
 					<Icon v-if={note.value.pinnedAt} type="pinAngleFill"/>
 					<Icon v-if={note.value.favedAt} type="starFill"/>
@@ -66,7 +66,7 @@ export default function NoteCard(props: Props & EventBindings<Events>, { emit }:
 						<div class="badge text-bg-secondary" v-if={note.value.characterCount}>{note.value.characterCount} characters</div>
 					</div>
 				</div>
-			</RouterLink>
+			</VaporRouterLink>
 		</>
 	);
 }
