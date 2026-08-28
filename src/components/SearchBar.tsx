@@ -23,7 +23,7 @@ export default function SearchBar() {
 		<>
 			<div class="me-auto position-relative">
 				<input ref="search-input" type="text" class="form-control pe-5" placeholder="Search" aria-label="Search notes" disabled={!listViewRoutes.includes(route.path)} onInput={debouncedSearch}/>
-				<button v-if={isSearchMode} class="btn-close small position-absolute top-50 end-0 translate-middle-y me-2" onClick={clearSearch} aria-label="Clear search"></button>
+				<button v-if={isSearchMode.value} class="btn-close small position-absolute top-50 end-0 translate-middle-y me-2" onClick={clearSearch} aria-label="Clear search"></button>
 			</div>
 		</>
 	);

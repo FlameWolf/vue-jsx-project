@@ -35,8 +35,8 @@ export default function SortControls(props: Props & EventBindings<Events>, { emi
 					<option value="wordCount">Words</option>
 					<option value="characterCount">Characters</option>
 				</select>
-				<button class="btn btn-outline-secondary btn-sm" onClick={() => emit(`toggleDirection`)} title={isAscending ? `Ascending` : `Descending`} aria-label={isAscending ? `Sort ascending, click to switch to descending` : `Sort descending, click to switch to ascending`}>
-					<Icon type={isAscending ? `sortDown` : `sortUp`}/>
+				<button class="btn btn-outline-secondary btn-sm" onClick={() => emit(`toggleDirection`)} title={isAscending.value ? `Ascending` : `Descending`} aria-label={isAscending.value ? `Sort ascending, click to switch to descending` : `Sort descending, click to switch to ascending`}>
+					<Icon type={isAscending.value ? `sortDown` : `sortUp`}/>
 				</button>
 			</div>
 		</>

@@ -12,7 +12,7 @@ export default function ThemeToggle() {
 	return (
 		<>
 			<button class="btn btn-secondary btn-sm" onClick={toggleTheme} aria-label={`Switch to ${isDark ? Theme.Light : Theme.Dark} theme`}>
-				<Icon type={isDark ? `moonStarsFill` : `sunFill`}/>
+				<Icon type={isDark.value ? `moonStarsFill` : `sunFill`}/>
 			</button>
 		</>
 	);

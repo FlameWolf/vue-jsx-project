@@ -25,7 +25,7 @@ export default function SelectionActionBar(props: Props & EventBindings<Events>,
 		<>
 			<div class="selection-action-bar">
 				<span class="fw-medium">{props.selectedCount} selected</span>
-				<DisplayColourList onSelectionChanged={colourSelected}/>
+				<DisplayColourList v-if={dropdown.show.value} onSelectionChanged={colourSelected}/>
 				<div class="d-flex gap-2 flex-wrap justify-content-end w-100">
 					<button v-if={props.showColours} ref="dropup-trigger" class="btn btn-sm btn-outline-primary dropdown-toggle" onClick={() => dropdown.toggle()}>Apply Colour</button>
 					<VaporFor in={props.actions}>

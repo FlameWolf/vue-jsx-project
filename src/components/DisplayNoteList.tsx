@@ -287,7 +287,7 @@ export default function DisplayNoteList(props: Props) {
 	return (
 		<>
 			<div v-if={view.value !== `active`} class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
-				<h2 class="mb-0">{pageTitle}</h2>
+				<h2 class="mb-0">{pageTitle.value}</h2>
 				<VaporRouterLink to="/notes" class="btn btn-secondary btn-sm">
 					<Icon type="chevronLeft"/>
 					<span class="ms-2">Back to Notes</span>

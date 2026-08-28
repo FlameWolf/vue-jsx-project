@@ -433,12 +433,12 @@ export default function EditNote(props: Props) {
 						<Icon type="aMinus"/>
 					</button>
 				</div>
-				<div class="d-flex flex-wrap gap-2" v-if={!isCreateMode && !isEditing && isTrashed}>
+				<div class="d-flex flex-wrap gap-2" v-if={!isCreateMode.value && !isEditing.value && isTrashed.value}>
 					<button class="btn btn-outline-primary btn-sm" onClick={restoreNote} title="Restore" aria-label="Restore">
 						<Icon type="reply"/>
 						<span class="d-none d-sm-inline ms-2">Restore</span>
 					</button>
-					<button class="btn btn-outline-secondary btn-sm" v-if={existingNote} onClick={() => exportNote(existingNote.value!)} title="Export" aria-label="Export">
+					<button class="btn btn-outline-secondary btn-sm" v-if={existingNote.value} onClick={() => exportNote(existingNote.value!)} title="Export" aria-label="Export">
 						<Icon type="download"/>
 						<span class="d-none d-sm-inline ms-2">Export</span>
 					</button>
@@ -447,7 +447,7 @@ export default function EditNote(props: Props) {
 						<span class="d-none d-sm-inline ms-2">Delete Permanently</span>
 					</button>
 				</div>
-				<div class="d-flex flex-wrap gap-2" v-else-if={!isCreateMode && !isEditing}>
+				<div class="d-flex flex-wrap gap-2" v-else-if={!isCreateMode.value && !isEditing.value}>
 					<button class="btn btn-outline-primary btn-sm" onClick={startEditing} title="Edit" aria-label="Edit">
 						<Icon type="pen"/>
 						<span class="d-none d-sm-inline ms-2">Edit</span>
@@ -456,7 +456,7 @@ export default function EditNote(props: Props) {
 						<Icon type="copy"/>
 						<span class="d-none d-sm-inline ms-2">Copy</span>
 					</button>
-					<button class="btn btn-outline-secondary btn-sm" v-if={!isFaved} onClick={faveNote} title="Favourite" aria-label="Favourite">
+					<button class="btn btn-outline-secondary btn-sm" v-if={!isFaved.value} onClick={faveNote} title="Favourite" aria-label="Favourite">
 						<Icon type="star"/>
 						<span class="d-none d-sm-inline ms-2">Favourite</span>
 					</button>
@@ -464,8 +464,8 @@ export default function EditNote(props: Props) {
 						<Icon type="starFill"/>
 						<span class="d-none d-sm-inline ms-2">Unfavourite</span>
 					</button>
-					<template v-if={!isArchived}>
-						<button class="btn btn-outline-secondary btn-sm" v-if={!isPinned} onClick={pinNote} title="Pin" aria-label="Pin">
+					<template v-if={!isArchived.value}>
+						<button class="btn btn-outline-secondary btn-sm" v-if={!isPinned.value} onClick={pinNote} title="Pin" aria-label="Pin">
 							<Icon type="pinAngle"/>
 							<span class="d-none d-sm-inline ms-2">Pin</span>
 						</button>
@@ -474,11 +474,11 @@ export default function EditNote(props: Props) {
 							<span class="d-none d-sm-inline ms-2">Unpin</span>
 						</button>
 					</template>
-					<button class="btn btn-outline-secondary btn-sm" v-if={existingNote} onClick={() => exportNote(existingNote.value!)} title="Download" aria-label="Download">
+					<button class="btn btn-outline-secondary btn-sm" v-if={existingNote.value} onClick={() => exportNote(existingNote.value!)} title="Download" aria-label="Download">
 						<Icon type="download"/>
 						<span class="d-none d-sm-inline ms-2">Download</span>
 					</button>
-					<button class="btn btn-outline-secondary btn-sm" v-if={isArchived} onClick={unarchiveNote} title="Unarchive" aria-label="Unarchive">
+					<button class="btn btn-outline-secondary btn-sm" v-if={isArchived.value} onClick={unarchiveNote} title="Unarchive" aria-label="Unarchive">
 						<Icon type="boxArrowUp"/>
 						<span class="d-none d-sm-inline ms-2">Unarchive</span>
 					</button>
@@ -491,8 +491,8 @@ export default function EditNote(props: Props) {
 						<span class="d-none d-sm-inline ms-2">Delete</span>
 					</button>
 				</div>
-				<div class="d-flex flex-wrap gap-2" v-if={isEditing}>
-					<div ref="dropdown-toggle" class={["colour-circle toolbar-icon rounded-circle", { [!!editColour ? `bg-${editColour}` : `vibgyor`]: true }]} onClick={() => dropdown.toggle()} role="button" aria-label="Apply Colour"></div>
+				<div class="d-flex flex-wrap gap-2" v-if={isEditing.value}>
+					<div ref="dropdown-toggle" class={["colour-circle toolbar-icon rounded-circle", { [!!editColour.value ? `bg-${editColour.value}` : `vibgyor`]: true }]} onClick={() => dropdown.toggle()} role="button" aria-label="Apply Colour"></div>
 					<button class="btn btn-outline-secondary btn-sm" disabled={!undoRedo.canUndo.value} onClick={doUndo} title="Undo" aria-label="Undo">
 						<Icon type="arrowCounterclockwise"/>
 						<span class="d-none d-sm-inline ms-2">Undo</span>
@@ -501,7 +501,7 @@ export default function EditNote(props: Props) {
 						<Icon type="arrowClockwise"/>
 						<span class="d-none d-sm-inline ms-2">Redo</span>
 					</button>
-					<button class="btn btn-primary btn-sm" disabled={!hasUnsavedChanges} onClick={saveNote} title="Save" aria-label="Save">
+					<button class="btn btn-primary btn-sm" disabled={!hasUnsavedChanges.value} onClick={saveNote} title="Save" aria-label="Save">
 						<Icon type="floppy"/>
 						<span class="d-none d-sm-inline ms-2">Save</span>
 					</button>
@@ -514,18 +514,18 @@ export default function EditNote(props: Props) {
 			<div v-if={dropdown.show.value} class="d-flex justify-content-end mb-3">
 				<DisplayColourList selected={editColour.value} selection-changed={updateColour}/>
 			</div>
-			<template v-if={!isEditing && existingNote.value}>
+			<template v-if={!isEditing.value && existingNote.value}>
 				<h2 class="note-title mb-3">{existingNote.value!.title}</h2>
 				<div class="d-flex flex-wrap gap-2">
 					<div class="badge text-bg-secondary">Created {formatDate(existingNote.value!.createdAt)}</div>
 					<div class="badge text-bg-secondary" v-if={existingNote.value!.modifiedAt}>Modified {formatDate(existingNote.value!.modifiedAt)}</div>
 				</div>
 				<hr/>
-				<Spinner v-if={!isContentLoaded} message="Loading note..." show-message={false}/>
-				<div v-else class="note-content">{loadedContent}</div>
+				<Spinner v-if={!isContentLoaded.value} message="Loading note..." show-message={false}/>
+				<div v-else class="note-content">{loadedContent.value}</div>
 			</template>
 			<div class="edit-note">
-				<template v-if={isEditing}>
+				<template v-if={isEditing.value}>
 					<input ref="title-input" value={editTitle.value.trim()} type="text" class="form-control form-control-lg" placeholder="Title" onInput={e => (editTitle.value = e.currentTarget.value.trim())}/>
 					<hr class="my-1"/>
 					<textarea ref="edit-text-area" value={editContent.value} onInput={onContentInput} class="form-control note-textarea" placeholder="Start writing..." rows="12"></textarea>
@@ -533,10 +533,10 @@ export default function EditNote(props: Props) {
 			</div>
 			<DisplayTagList v-if={!!editTags.value?.length || isEditing.value} class="my-3" activeTags={editTags.value} allowEdit={isEditing.value} allowCreate={true} onSelectionChanged={tags => (editTags.value = tags)}/>
 			<hr v-else/>
-			<div class="d-flex flex-wrap gap-2 mt-3" v-if={hasContent}>
-				<span class="badge text-bg-secondary" v-if={sentenceCount}>{sentenceCount} sentences</span>
-				<span class="badge text-bg-secondary" v-if={wordCount}>{wordCount} words</span>
-				<span class="badge text-bg-secondary" v-if={characterCount}>{characterCount} characters</span>
+			<div class="d-flex flex-wrap gap-2 mt-3" v-if={hasContent.value}>
+				<span class="badge text-bg-secondary" v-if={sentenceCount.value}>{sentenceCount.value} sentences</span>
+				<span class="badge text-bg-secondary" v-if={wordCount.value}>{wordCount.value} words</span>
+				<span class="badge text-bg-secondary" v-if={characterCount.value}>{characterCount.value} characters</span>
 			</div>
 		</>
 	);

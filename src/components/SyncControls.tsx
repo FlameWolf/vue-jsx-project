@@ -10,7 +10,7 @@ import Icon from "@/components/Icon";
 export default function SyncControls() {
 	let readyTimeout: ReturnType<typeof setTimeout> | null = null;
 	const syncMenuTrigger = useTemplateRef<HTMLElement>("sync-menu-trigger");
-	const { show: showSyncMenu, toggle: toggleSyncMenu } = useDropdown(syncMenuTrigger);
+	const dropdown = useDropdown(syncMenuTrigger);
 	const authTimedOut = ref(false);
 
 	async function handleSync(force = false) {
@@ -115,7 +115,7 @@ export default function SyncControls() {
 				<template v-if={isReady.value}>
 					<template v-if={isSignedIn.value}>
 						<div class="dropdown">
-							<button ref="sync-menu-trigger" class="btn btn-outline-secondary btn-sm" onClick={() => toggleSyncMenu()} disabled={isSyncing.value} title={syncError.value ? `Sync error ${syncError}` : `Google Drive Sync`} aria-label="Google Drive Sync">
+							<button ref="sync-menu-trigger" class="btn btn-outline-secondary btn-sm" onClick={() => dropdown.toggle()} disabled={isSyncing.value} title={syncError.value ? `Sync error ${syncError.value}` : `Google Drive Sync`} aria-label="Google Drive Sync">
 								<span v-if={isSyncing.value}>
 									<Spinner minimal={true}/>
 								</span>
@@ -130,7 +130,7 @@ export default function SyncControls() {
 								</span>
 								<span class="d-none d-md-inline ms-2">{user.value?.name ?? "Sync"}</span>
 							</button>
-							<ul v-if={showSyncMenu} class="dropdown-menu show end-0 mt-1">
+							<ul v-if={dropdown.show.value} class="dropdown-menu show end-0 mt-1">
 								<li class="dropdown-header text-muted small px-3 py-1 text-truncate">{user.value?.email}</li>
 								<li class="dropdown-divider"></li>
 								<li>

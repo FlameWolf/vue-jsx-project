@@ -218,7 +218,7 @@ export default function DisplayTagList(props: Props & EventBindings<Events>, { e
 								<div class="d-flex gap-2 px-3 py-1">
 									<label class="btn btn-sm btn-outline-secondary flex-grow-1">
 										<input type="checkbox" class="form-check-input" checked={allSelected.value} disabled={!filteredTags.value.length} onChange={toggleSelectAll}/>
-										<span class="ms-2">{allSelected ? "Deselect All" : "Select All"}</span>
+										<span class="ms-2">{allSelected.value ? "Deselect All" : "Select All"}</span>
 									</label>
 									<button v-if={props.allowDelete} class="btn btn-sm btn-outline-danger flex-grow-1" disabled={!selectedTags.value.length} onClick={() => deleteTags(selectedTags.value)}>Delete Selected</button>
 								</div>
@@ -272,9 +272,9 @@ export default function DisplayTagList(props: Props & EventBindings<Events>, { e
 									<span>All</span>
 								</label>
 							</div>
-							<div v-else-if={isSelecting} class="d-flex gap-1 ms-auto">
-								<button class="btn btn-sm btn-outline-primary" disabled={!enableActions} onClick={() => updateNoteTags(`add`)}>Apply</button>
-								<button class="btn btn-sm btn-outline-danger" disabled={!enableActions} onClick={() => updateNoteTags(`remove`)}>Remove</button>
+							<div v-else-if={isSelecting.value} class="d-flex gap-1 ms-auto">
+								<button class="btn btn-sm btn-outline-primary" disabled={!enableActions.value} onClick={() => updateNoteTags(`add`)}>Apply</button>
+								<button class="btn btn-sm btn-outline-danger" disabled={!enableActions.value} onClick={() => updateNoteTags(`remove`)}>Remove</button>
 							</div>
 						</template>
 					</div>
