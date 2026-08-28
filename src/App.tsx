@@ -14,12 +14,12 @@ import ScrollButtons from "@/components/ScrollButtons";
 import NotificationList from "@/components/NotificationList";
 import ConfirmDialogue from "@/components/ConfirmDialogue";
 
-onMounted(async () => {
-	await hydrateNotes();
-	purgeStaleDrafts();
-});
-
 export default function App() {
+	onMounted(async () => {
+		await hydrateNotes();
+		purgeStaleDrafts();
+	});
+
 	return (
 		<>
 			<nav class="navbar navbar-expand bg-body-tertiary border-bottom px-2">
