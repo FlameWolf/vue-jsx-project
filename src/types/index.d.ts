@@ -55,7 +55,15 @@ interface SelectionAction {
 	variant: "primary" | "secondary" | "danger" | "outline-primary" | "outline-secondary" | "outline-danger";
 }
 
-type LegalBlock = { type: "paragraph"; text: string } | { type: "list"; items: string[] };
+type LegalBlock =
+	| {
+			type: "paragraph";
+			text: string;
+	  }
+	| {
+			type: "list";
+			items: string[];
+	  };
 
 interface LegalSection {
 	heading: string;

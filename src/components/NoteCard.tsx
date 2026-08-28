@@ -12,7 +12,9 @@ type Props = {
 	selectionMode: boolean;
 	selected: boolean;
 };
-type Events = { toggleSelect: (id: UUID) => void };
+type Events = {
+	toggleSelect: (id: UUID) => void
+};
 
 export default function NoteCard(props: Props & EventBindings<Events>, { emit }: SetupContext<Events>) {
 	const note = computed(() => props.note);

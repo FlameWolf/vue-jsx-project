@@ -1,7 +1,10 @@
 import { clearStateCookie, decodeIdToken, exchangeCode, getOrigin, isConfigured, parseCookies, setSessionCookie, STATE_COOKIE } from "../_lib.ts";
 import type { IncomingMessage, ServerResponse } from "node:http";
 
-type Profile = { email: string; name: string };
+type Profile = {
+	email: string;
+	name: string
+};
 
 function renderHtml(origin: string, ok: boolean, user: Profile | null, error: string | null): string {
 	const payload = JSON.stringify({ type: "qp-auth", ok, user, error });
