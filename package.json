@@ -17,16 +17,16 @@
 		"idb": "^8.0.3",
 		"jszip": "^3.10.1",
 		"vue": "rc",
-		"vue-jsx-vapor": "^3.2.21",
+		"vue-jsx-vapor": "^3.2.22",
 		"vue-router": "https://pkg.pr.new/vue-router@2509"
 	},
 	"devDependencies": {
-		"@types/node": "^24.13.3",
+		"@types/node": "^26.4.0",
 		"@vitejs/plugin-vue-jsx": "^5.1.6",
 		"@vue/tsconfig": "^0.9.1",
-		"typescript": "~6.0.0",
-		"vite": "^8.1.5",
-		"vue-tsc": "^3.3.7"
+		"typescript": "^6.0.3",
+		"vite": "^8.2.2",
+		"vue-tsc": "^3.3.11"
 	},
 	"overrides": {
 		"vue": "rc",
