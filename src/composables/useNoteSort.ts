@@ -1,4 +1,5 @@
 import { computed, reactive, watch } from "vue";
+import { colourMap } from "@/constants/colours";
 import { SORT_BY_KEY, SORT_DIRECTION_KEY, SORT_DIRECTIONS, SORT_FIELDS } from "@/constants/sort";
 import { getKV, setKV } from "@/storage/db";
 import type { NoteModel } from "@/models/NoteModel";
@@ -46,6 +47,13 @@ export async function hydrateSortPrefs(): Promise<void> {
 	);
 }
 
+function getColourValue(name: string | undefined): number {
+	if (!name) {
+		return 0;
+	}
+	return colourMap[name as Colour] ?? 0;
+}
+
 function compareNotes(a: NoteModel, b: NoteModel, field: SortField): number {
 	switch (field) {
 		case "title":
@@ -56,6 +64,11 @@ function compareNotes(a: NoteModel, b: NoteModel, field: SortField): number {
 			const aTime = (a.modifiedAt ?? a.createdAt).getTime();
 			const bTime = (b.modifiedAt ?? b.createdAt).getTime();
 			return aTime - bTime;
+		}
+		case "colour": {
+			const aColour = getColourValue(a.colour);
+			const bcolour = getColourValue(b.colour);
+			return aColour - bcolour;
 		}
 		case "sentenceCount":
 			return a.sentenceCount - b.sentenceCount;
