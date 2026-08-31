@@ -1,5 +1,5 @@
 import { computed, reactive, watch } from "vue";
-import { colourMap } from "@/constants/colours";
+import { colours } from "@/constants/colours";
 import { SORT_BY_KEY, SORT_DIRECTION_KEY, SORT_DIRECTIONS, SORT_FIELDS } from "@/constants/sort";
 import { getKV, setKV } from "@/storage/db";
 import type { NoteModel } from "@/models/NoteModel";
@@ -51,7 +51,7 @@ function getColourValue(name: string | undefined): number {
 	if (!name) {
 		return 0;
 	}
-	return colourMap[name as Colour] ?? 0;
+	return colours.indexOf(name as Colour);
 }
 
 function compareNotes(a: NoteModel, b: NoteModel, field: SortField): number {
