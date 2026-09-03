@@ -3,7 +3,6 @@ import Icon from "@/components/Icon";
 import type { SetupContext } from "vue";
 
 type Props = {
-	message: string;
 	showActions: boolean;
 	showCreate: boolean;
 };
@@ -21,7 +20,7 @@ export default function EmptyState(props: Props & EventBindings<Events>, { emit 
 						<path d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
 					</svg>
 				</div>
-				<p class="text-muted mb-3" v-html={props.message}></p>
+				<div class="text-muted mb-3"><slot></slot></div>
 				<div v-if={props.showActions} class="d-flex flex-column gap-2 align-items-center">
 					<div v-if={props.showCreate} class="d-flex gap-2 justify-content-center flex-wrap">
 						<VaporRouterLink to="/notes/new" class="btn btn-primary">Create a note</VaporRouterLink>
