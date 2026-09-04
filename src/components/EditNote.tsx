@@ -514,7 +514,7 @@ function EditNote(props: Props) {
 				</div>
 			</div>
 			<div v-if={dropdown.show.value} class="d-flex justify-content-end mb-3">
-				<DisplayColourList selected={editColour.value} selection-changed={updateColour}/>
+				<DisplayColourList selected={editColour.value} onSelectionChanged={updateColour}/>
 			</div>
 			<template v-if={!isEditing.value && existingNote.value}>
 				<h2 class="note-title mb-3">{existingNote.value!.title}</h2>
