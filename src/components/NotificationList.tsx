@@ -1,5 +1,5 @@
 import { computed } from "vue";
-import { VaporFor } from "vue-jsx-vapor";
+import { normalizeClass, VaporFor } from "vue-jsx-vapor";
 import { notifications, removeNotification } from "@/stores/notifications";
 
 export default function NotificationList() {
@@ -11,7 +11,7 @@ export default function NotificationList() {
 				<VaporFor in={sortedNotifications.value}>
 					{notification => (
 						<template key={notification.id}>
-							<div class={["alert m-0 ms-auto", { [`alert-${notification.type}`]: true }]} role="alert">
+							<div class={normalizeClass(["alert m-0 ms-auto", { [`alert-${notification.type}`]: true }])} role="alert">
 								<div class="d-flex">
 									<div v-html={notification.message}></div>
 									<button class="btn-close ms-2" onClick={() => removeNotification(notification.id)} aria-label="Close"></button>

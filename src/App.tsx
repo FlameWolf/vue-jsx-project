@@ -1,5 +1,6 @@
 import "@/styles.css";
 import { onMounted } from "vue";
+import { normalizeClass } from "vue-jsx-vapor";
 import { VaporRouterLink, VaporRouterView } from "vue-router";
 import { currentColour } from "@/stores/app";
 import { isLoading, hydrateNotes } from "@/stores/notes";
@@ -34,7 +35,7 @@ export default function App() {
 					</div>
 				</div>
 			</nav>
-			<main class={["flex-grow-1 container px-2 py-4", { [`bg-${currentColour.value}`]: !!currentColour.value }]}>
+			<main class={normalizeClass(["flex-grow-1 container px-2 py-4", { [`bg-${currentColour.value}`]: !!currentColour.value }])}>
 				<Spinner v-if={isLoading.value} message="Loading notes..."/>
 				<VaporRouterView v-else/>
 			</main>

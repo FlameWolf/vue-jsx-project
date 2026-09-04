@@ -1,4 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from "vue";
+import { normalizeClass, type FormEvent } from "vue-jsx-vapor";
 import { onBeforeRouteLeave, VaporRouterLink, useRoute, useRouter } from "vue-router";
 import { emptyString } from "@/constants/common";
 import { areArraysEqual, areSetsEqual, copyNullableArray } from "@/utils/common";
@@ -20,7 +21,6 @@ import Icon from "@/components/Icon";
 import DisplayColourList from "@/components/DisplayColourList";
 import Spinner from "@/components/Spinner";
 import DisplayTagList from "@/components/DisplayTagList";
-import type { FormEvent } from "vue-jsx-vapor";
 import type { UUID } from "crypto";
 
 type Props = {
@@ -494,7 +494,7 @@ export default function EditNote(props: Props) {
 					</button>
 				</div>
 				<div class="d-flex flex-wrap gap-2" v-if={isEditing.value}>
-					<div ref="dropdown-toggle" class={["colour-circle toolbar-icon rounded-circle", { [!!editColour.value ? `bg-${editColour.value}` : `vibgyor`]: true }]} onClick={() => dropdown.toggle()} role="button" aria-label="Apply Colour"></div>
+					<div ref="dropdown-toggle" class={normalizeClass(["colour-circle toolbar-icon rounded-circle", { [!!editColour.value ? `bg-${editColour.value}` : `vibgyor`]: true }])} onClick={() => dropdown.toggle()} role="button" aria-label="Apply Colour"></div>
 					<button class="btn btn-outline-secondary btn-sm" disabled={!undoRedo.canUndo.value} onClick={doUndo} title="Undo" aria-label="Undo">
 						<Icon type="arrowCounterclockwise"/>
 						<span class="d-none d-sm-inline ms-2">Undo</span>

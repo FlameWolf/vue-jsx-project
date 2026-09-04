@@ -1,5 +1,5 @@
 import { computed, onMounted, ref, useTemplateRef, watch, type SetupContext } from "vue";
-import { VaporFor } from "vue-jsx-vapor";
+import { normalizeClass, VaporFor } from "vue-jsx-vapor";
 import { useRouter } from "vue-router";
 import { emptyString } from "@/constants/common";
 import { areSetsEqual, normaliseTag, titleCase } from "@/utils/common";
@@ -208,9 +208,9 @@ export default function DisplayTagList(props: Props & EventBindings<Events>, { e
 
 	return (
 		<>
-			<div class={["d-flex gap-1 p-1 border rounded", flexModifiers.value]}>
+			<div class={normalizeClass(["d-flex gap-1 p-1 border rounded", flexModifiers.value])}>
 				<div class="dropdown w-100">
-					<div ref="dropdown-menu" class={["d-flex gap-1 align-items-center", flexModifiers.value]}>
+					<div ref="dropdown-menu" class={normalizeClass(["d-flex gap-1 align-items-center", flexModifiers.value])}>
 						<button v-if={props.allowEdit} ref="dropdown-toggle" class="btn btn-sm btn-outline-secondary align-self-start dropdown-toggle" onClick={() => dropdown.toggle()}>Tags</button>
 						<label v-else class="small align-self-start border rounded px-2 py-1">Tags</label>
 						<div v-if={dropdown.show.value} class="dropdown-menu show w-100 position-relative tag-list">
@@ -225,7 +225,7 @@ export default function DisplayTagList(props: Props & EventBindings<Events>, { e
 								<div class="dropdown-divider"></div>
 							</template>
 							<div class="d-flex gap-2 px-3 py-1">
-								<div class={["flex-nowrap w-100", { [`input-group`]: props.allowCreate }]}>
+								<div class={normalizeClass(["flex-nowrap w-100", { [`input-group`]: props.allowCreate }])}>
 									<input ref="tag-input" value={searchText.value} type="text" class="form-control form-control-sm" placeholder="Search" onInput={e => searchText.value = e.currentTarget.value.trim()}/>
 									<button v-if={props.allowCreate} class="btn btn-sm btn-outline-secondary" disabled={hasExactMatch.value} onClick={() => createTag(searchText.value)}>
 										<Icon type="plusLg"/>
@@ -252,7 +252,7 @@ export default function DisplayTagList(props: Props & EventBindings<Events>, { e
 							<VaporFor in={selectedTags.value}>
 								{tag => (
 									<>
-										<component is={props.allowEdit ? `div` : `a`} class={["badge text-bg-secondary", { [`py-2`]: !props.allowEdit }]} onClick={() => addToSearchTags(tag)} v-bind={props.allowEdit ? {} : { [`role`]: `button` }}>
+										<component is={props.allowEdit ? `div` : `a`} class={normalizeClass(["badge text-bg-secondary", { [`py-2`]: !props.allowEdit }])} onClick={() => addToSearchTags(tag)} v-bind={props.allowEdit ? {} : { [`role`]: `button` }}>
 											<span>{tag}</span>
 											<button v-if={props.allowEdit} class="small btn-close ms-2" onClick={() => unselectTag(tag)}></button>
 										</component>
@@ -263,11 +263,11 @@ export default function DisplayTagList(props: Props & EventBindings<Events>, { e
 						<template v-if={selectedTags.value.length}>
 							<div v-if={props.showFilterType} class="input-group input-group-sm flex-nowrap w-auto ms-auto">
 								<span class="input-group-text">Match:</span>
-								<label class={["btn btn-outline-secondary", { [`active`]: notesStore.tagFilter.value === `any` }]}>
+								<label class={normalizeClass(["btn btn-outline-secondary", { [`active`]: notesStore.tagFilter.value === `any` }])}>
 									<input type="radio" class="btn-check" name="filter-type" onChange={() => notesStore.setFilterType(`any`)}/>
 									<span>Any</span>
 								</label>
-								<label class={["btn btn-outline-secondary", { [`active`]: notesStore.tagFilter.value === `all` }]}>
+								<label class={normalizeClass(["btn btn-outline-secondary", { [`active`]: notesStore.tagFilter.value === `all` }])}>
 									<input type="radio" class="btn-check" name="filter-type" onChange={() => notesStore.setFilterType(`all`)}/>
 									<span>All</span>
 								</label>

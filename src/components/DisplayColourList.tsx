@@ -1,4 +1,4 @@
-import { VaporFor } from "vue-jsx-vapor";
+import { normalizeClass, VaporFor } from "vue-jsx-vapor";
 import { colours } from "@/constants/colours";
 import * as notesStore from "@/stores/notes";
 import Icon from "@/components/Icon";
@@ -25,7 +25,7 @@ export default function DisplayColourList(props: Props & EventBindings<Events>, 
 			<div class="d-flex flex-wrap gap-2 p-2 border rounded">
 				<VaporFor in={colours}>
 					{colour => (
-						<a class={["colour-circle rounded-circle", { [`bg-${colour}`]: true }]} onClick={() => emit(`selectionChanged`, colour)} role="button" aria-label={colour}>
+						<a class={normalizeClass(["colour-circle rounded-circle", { [`bg-${colour}`]: true }])} onClick={() => emit(`selectionChanged`, colour)} role="button" aria-label={colour}>
 							<Icon v-if={isActive(colour)} type="check2"/>
 						</a>
 					)}

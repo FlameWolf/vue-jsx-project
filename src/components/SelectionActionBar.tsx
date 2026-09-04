@@ -1,5 +1,5 @@
 import { useTemplateRef, type SetupContext } from "vue";
-import { VaporFor } from "vue-jsx-vapor";
+import { normalizeClass, VaporFor } from "vue-jsx-vapor";
 import { useDropdown } from "@/composables/useDropdown";
 import DisplayColourList from "@/components/DisplayColourList";
 
@@ -30,7 +30,7 @@ export default function SelectionActionBar(props: Props & EventBindings<Events>,
 					<button v-if={props.showColours} ref="dropup-trigger" class="btn btn-sm btn-outline-primary dropdown-toggle" onClick={() => dropdown.toggle()}>Apply Colour</button>
 					<VaporFor in={props.actions}>
 						{action => (
-							<button key={action.key} class={["btn btn-sm", { [`btn-${action.variant}`]: true }]} onClick={() => emit(`action`, action.key)}>{action.label}</button>
+							<button key={action.key} class={normalizeClass(["btn btn-sm", { [`btn-${action.variant}`]: true }])} onClick={() => emit(`action`, action.key)}>{action.label}</button>
 						)}
 					</VaporFor>
 					<button class="btn btn-outline-secondary btn-sm" onClick={() => emit(`cancel`)}>Cancel</button>

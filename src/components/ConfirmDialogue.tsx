@@ -1,4 +1,5 @@
 import { onBeforeUnmount, onMounted, VaporTransition, withModifiers } from "vue";
+import { normalizeClass } from "vue-jsx-vapor";
 import { onCancel, onConfirm, state } from "@/composables/useConfirmDialogue";
 
 const handlers: Record<string, (() => void) | undefined> = {
@@ -32,7 +33,7 @@ export default function ConfirmDialogue() {
 						<p class="confirm-message">{state.value.message}</p>
 						<div class="confirm-actions">
 							<button type="button" class="btn btn-outline-secondary" onClick={onCancel}>{state.value.cancelText}</button>
-							<button type="button" class={["btn", { [`btn-${state.value.variant}`]: true }]} onClick={onConfirm} autofocus={true}>{state.value.confirmText}</button>
+							<button type="button" class={normalizeClass(["btn", { [`btn-${state.value.variant}`]: true }])} onClick={onConfirm} autofocus={true}>{state.value.confirmText}</button>
 						</div>
 					</div>
 				</div>

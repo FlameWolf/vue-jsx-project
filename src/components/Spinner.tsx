@@ -1,4 +1,5 @@
 import { computed } from "vue";
+import { normalizeClass } from "vue-jsx-vapor";
 
 type Props = {
 	message?: string;
@@ -14,7 +15,7 @@ export default function Spinner(props: Props) {
 	return (
 		<>
 			<template v-if={!props.minimal}>
-				<div class={["d-flex flex-column justify-content-center align-items-center", { [`py-3`]: !showMessage.value }]}>
+				<div class={normalizeClass(["d-flex flex-column justify-content-center align-items-center", { [`py-3`]: !showMessage.value }])}>
 					<div class="spinner-border" aria-hidden="true" aria-label={showMessage.value ? undefined : props.message}></div>
 					<div v-if={showMessage.value} class="mt-3" role="status">{props.message ?? "Loading..."}</div>
 				</div>
