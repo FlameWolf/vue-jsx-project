@@ -21,28 +21,28 @@ const router = createRouter({
 		{ path: "/trash", redirect: "/notes/trash" },
 		{
 			path: "/notes",
-			component: async () => DisplayNoteList,
+			component: DisplayNoteList,
 			props: { view: "active" }
 		},
 		{
 			path: "/notes/favourite",
-			component: async () => DisplayNoteList,
+			component: DisplayNoteList,
 			props: { view: "favourited" }
 		},
 		{
 			path: "/notes/archive",
-			component: async () => DisplayNoteList,
+			component: DisplayNoteList,
 			props: { view: "archived" }
 		},
 		{
 			path: "/notes/trash",
-			component: async () => DisplayNoteList,
+			component: DisplayNoteList,
 			props: { view: "trash" }
 		},
-		{ path: "/notes/new", component: async () => EditNote },
+		{ path: "/notes/new", component: EditNote },
 		{
 			path: "/notes/:id",
-			component: async () => EditNote,
+			component: EditNote,
 			props: route => Object.assign(route.params, { backRoute: route.meta.fromPath })
 		},
 		{ path: "/privacy", component: () => import("@/components/PrivacyPolicy") },
