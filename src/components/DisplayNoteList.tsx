@@ -32,7 +32,7 @@ type NoteSection = {
 	showNewCard?: boolean;
 };
 
-export default function DisplayNoteList(props: Props) {
+function DisplayNoteList(props: Props) {
 	const dropdownToggle = useTemplateRef<HTMLElement>("dropdown-toggle");
 	const dropdownMenu = useTemplateRef<HTMLElement>("dropdown-menu");
 	const dropdown = useDropdown(dropdownToggle, {
@@ -379,3 +379,5 @@ export default function DisplayNoteList(props: Props) {
 		</>
 	);
 }
+
+export default Object.assign(DisplayNoteList, { displayName: DisplayNoteList.name });

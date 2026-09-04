@@ -28,7 +28,7 @@ type Props = {
 	backRoute?: string;
 };
 
-export default function EditNote(props: Props) {
+function EditNote(props: Props) {
 	const router = useRouter();
 	const route = useRoute();
 	const isCreateMode = computed(() => route.path === "/notes/new");
@@ -543,3 +543,5 @@ export default function EditNote(props: Props) {
 		</>
 	);
 }
+
+export default Object.assign(EditNote, { displayName: EditNote.name });
