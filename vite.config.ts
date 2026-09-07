@@ -45,7 +45,7 @@ function precacheManifestPlugin(): PluginOption {
 }
 
 export default defineConfig(({ command }) => ({
-	plugins: [vueJsxVapor({ macros: true }), precacheManifestPlugin()],
+	plugins: [vueJsxVapor(), precacheManifestPlugin()],
 	resolve: {
 		alias: {
 			"@": fileURLToPath(new URL("./src", import.meta.url))
