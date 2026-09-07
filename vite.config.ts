@@ -4,6 +4,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { defineConfig, PluginOption } from "vite";
 import vueJsxVapor from "vue-jsx-vapor/vite";
+import { vdomGuard } from "./plugins/vdom-guard";
 import purgeCSSPlugin from "@fullhuman/postcss-purgecss";
 
 const apiProxy = {
@@ -45,7 +46,13 @@ function precacheManifestPlugin(): PluginOption {
 }
 
 export default defineConfig(({ command }) => ({
-	plugins: [vueJsxVapor(), precacheManifestPlugin()],
+	plugins: [
+		vueJsxVapor(),
+		precacheManifestPlugin(),
+		vdomGuard({
+			failOnLeak: false
+		})
+	],
 	resolve: {
 		alias: {
 			"@": fileURLToPath(new URL("./src", import.meta.url))
