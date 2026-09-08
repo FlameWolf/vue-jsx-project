@@ -28,10 +28,8 @@ export default function SelectionActionBar(props: Props & EventBindings<Events>,
 				<DisplayColourList v-if={dropdown.show.value} onSelectionChanged={colourSelected}/>
 				<div class="d-flex gap-2 flex-wrap justify-content-end w-100">
 					<button v-if={props.showColours} ref="dropup-trigger" class="btn btn-sm btn-outline-primary dropdown-toggle" onClick={() => dropdown.toggle()}>Apply Colour</button>
-					<VaporFor in={props.actions}>
-						{action => (
-							<button key={action.key} class={normalizeClass(["btn btn-sm", { [`btn-${action.variant}`]: true }])} onClick={() => emit(`action`, action.key)}>{action.label}</button>
-						)}
+					<VaporFor in={props.actions} getKey={action => action.key}>
+						{action => <button class={normalizeClass(["btn btn-sm", { [`btn-${action.value.variant}`]: true }])} onClick={() => emit(`action`, action.value.key)}>{action.value.label}</button>}
 					</VaporFor>
 					<button class="btn btn-outline-secondary btn-sm" onClick={() => emit(`cancel`)}>Cancel</button>
 				</div>

@@ -355,23 +355,25 @@ function DisplayNoteList(props: Props) {
 					<DisplayColourList filterMode={true} onSelectionChanged={updateSearchColours}/>
 				</div>
 				<DisplayTagList class="mb-3" activeTags={Array.from(notesStore.searchTags.value)} allowCreate={isSelecting.value} allowDelete={true} allowEdit={true} allowManage={!isSelecting.value} showFilterType={!isSelecting.value}/>
-				<VaporFor in={noteSections.value}>
+				<VaporFor in={noteSections.value} getKey={section => section.key}>
 					{section => (
-						<template key={section.key}>
-							<div v-if={section.divider} class="d-flex align-items-center my-4">
+						<>
+							<div v-if={section.value.divider} class="d-flex align-items-center my-4">
 								<div class="flex-grow-1 border-bottom"></div>
-								<span class="px-3 text-muted small">{section.divider}</span>
+								<span class="px-3 text-muted small">{section.value.divider}</span>
 								<div class="flex-grow-1 border-bottom"></div>
 							</div>
 							<div class="notes-grid">
-								<VaporRouterLink v-if={section.showNewCard && !isSelecting.value} to="/notes/new" class="card note-card new-note-card text-decoration-none">
+								<VaporRouterLink v-if={section.value.showNewCard && !isSelecting.value} to="/notes/new" class="card note-card new-note-card text-decoration-none">
 									<div class="card-body d-flex align-items-center justify-content-center">
 										<span class="fs-1 text-muted">+</span>
 									</div>
 								</VaporRouterLink>
-								<VaporFor in={section.notes}>{note => <NoteCard key={note.id} note={note} selectionMode={isSelecting.value} selected={isSelected(note.id)} onToggleSelect={toggleSelection}/>}</VaporFor>
+								<VaporFor in={section.value.notes} getKey={note => note.id}>
+									{note => <NoteCard note={note.value} selectionMode={isSelecting.value} selected={isSelected(note.value.id)} onToggleSelect={toggleSelection}/>}
+								</VaporFor>
 							</div>
-						</template>
+						</>
 					)}
 				</VaporFor>
 				<SelectionActionBar v-if={isSelecting.value && selectedCount.value > 0} selectedCount={selectedCount.value} actions={selectionActions.value} showColours={true} onAction={handleSelectionAction} onCancel={exitSelectionMode}/>

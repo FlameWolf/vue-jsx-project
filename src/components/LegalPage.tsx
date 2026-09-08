@@ -26,19 +26,23 @@ export default function LegalPage(props: Props) {
 			</div>
 			<article class="legal-content mx-auto">
 				<p class="text-muted small mb-4">Last updated: {props.effectiveDate}</p>
-				<VaporFor in={introParagraphs.value}>{(paragraph, index) => <p key={`intro-${index.value}`}>{paragraph}</p>}</VaporFor>
-				<VaporFor in={props.sections}>
+				<VaporFor in={introParagraphs.value} getKey={(_, index) => `intro-${index}`}>
+					{paragraph => <p>{paragraph.value}</p>}
+				</VaporFor>
+				<VaporFor in={props.sections} getKey={section => section.heading}>
 					{section => (
-						<section key={section.heading} class="mt-4">
-							<h3 class="h5 mb-3">{section.heading}</h3>
-							<VaporFor in={section.blocks}>
-								{(block, index) => (
-									<template key={index.value}>
-										<p v-if={block.type === `paragraph`} v-html={(block as ParagraphBlock).text}></p>
+						<section class="mt-4">
+							<h3 class="h5 mb-3">{section.value.heading}</h3>
+							<VaporFor in={section.value.blocks} getKey={(_, index) => index}>
+								{block => (
+									<>
+										<p v-if={block.value.type === `paragraph`} v-html={(block.value as ParagraphBlock).text}></p>
 										<ul v-else class="mb-3">
-											<VaporFor in={(block as ListBlock).items}>{(item, itemIndex) => <li key={itemIndex.value} class="mb-1" v-html={item}></li>}</VaporFor>
+											<VaporFor in={(block.value as ListBlock).items} getKey={(_, index) => index}>
+												{item => <li class="mb-1" v-html={item}></li>}
+											</VaporFor>
 										</ul>
-									</template>
+									</>
 								)}
 							</VaporFor>
 						</section>
