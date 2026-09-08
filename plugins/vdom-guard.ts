@@ -37,9 +37,7 @@ function traceChains(ctx: PluginContext, target: string, maxChains: number): str
 }
 
 export function vdomGuard(opts: Options = {}): Plugin {
-	const markers = opts.markers ?? DEFAULT_MARKERS;
-	const maxChains = opts.maxChains ?? 5;
-	const failOnLeak = opts.failOnLeak ?? true;
+	const { markers = DEFAULT_MARKERS, maxChains = 5, failOnLeak = false } = opts;
 	const markerRes = markers.map(m => new RegExp(`\\b${m}\\b`));
 	return {
 		name: "vdom-guard",
