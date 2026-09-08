@@ -1,13 +1,20 @@
 global {
-	declare module "@vue/runtime-core" {
-		type CaptureEvent = `on${Capitalize<string>}_capture`;
-		type NativeEventHandler = (e: Event | undefined) => any;
+	module "@vue/runtime-core" {
 		interface ComponentCustomProps {
-			[key: CaptureEvent]: NativeEventHandler;
+			[key?: EventName]: NativeEventHandler;
 			title?: string;
 		}
 	}
+	declare module "vue-jsx-vapor" {
+		interface IntrinsicAttributes {
+			[key?: EventName]: NativeEventHandler;
+		}
+	}
 }
+
+type EventName = `on${Capitalize<string>}${`_${string}` | ``}`;
+
+type NativeEventHandler = ((e: Event) => void) | (() => void);
 
 type EventBindings<T extends Record<string, unknown>> = {
 	[K in keyof T as `on${Capitalize<string & K>}`]?: T[K];
