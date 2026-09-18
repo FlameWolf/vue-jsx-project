@@ -45,6 +45,7 @@ export default function DisplayTagList(props: Props & EventBindings<Events>, { e
 	const allSelected = computed(() => filteredTags.value.every(tag => selectedTags.value.includes(tag)));
 	const hasExactMatch = computed(() => !searchText.value || notesStore.tags.value.some(tag => equals(tag, normaliseTag(searchText.value))));
 	const enableActions = computed(() => !!(selectedCount.value && selectedTags.value.length));
+	const wrapperElem = computed(() => props.allowEdit ? "div" : "a");
 
 	function syncState(direction: "up" | "down") {
 		if (!props.allowEdit || isSelecting.value) {
@@ -252,10 +253,10 @@ export default function DisplayTagList(props: Props & EventBindings<Events>, { e
 							<VaporFor in={selectedTags.value}>
 								{tag => (
 									<>
-										<component is={props.allowEdit ? `div` : `a`} class={normalizeClass(["badge text-bg-secondary", { [`py-2`]: !props.allowEdit }])} onClick={() => addToSearchTags(tag)} v-bind={props.allowEdit ? {} : { [`role`]: `button` }}>
+										<wrapperElem.value class={normalizeClass(["badge text-bg-secondary", { [`py-2`]: !props.allowEdit }])} onClick={() => addToSearchTags(tag)} v-bind={props.allowEdit ? {} : { [`role`]: `button` }}>
 											<span>{tag}</span>
 											<button v-if={props.allowEdit} class="small btn-close ms-2" onClick={() => unselectTag(tag)}></button>
-										</component>
+										</wrapperElem.value>
 									</>
 								)}
 							</VaporFor>
