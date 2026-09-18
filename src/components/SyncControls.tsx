@@ -175,7 +175,7 @@ export default function SyncControls() {
 						<span class="d-none d-sm-inline ms-2">Sign-in unavailable</span>
 					</button>
 					<button v-else class="btn btn-outline-secondary btn-sm" disabled={true} aria-label="Initialising Google Sign-In">
-						<Spinner minimal={true} tag="span"/>
+						<Spinner minimal={true} wrapperElem="span"/>
 					</button>
 				</template>
 			</template>
