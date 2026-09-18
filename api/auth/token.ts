@@ -1,4 +1,4 @@
-import { clearSessionCookie, decryptSession, isConfigured, parseCookies, refreshAccessToken, sendJson, SESSION_COOKIE, setSessionCookie, TokenResponse } from "../_lib.ts";
+import { clearSessionCookie, decryptSession, isConfigured, parseCookies, refreshAccessToken, sendJson, SESSION_COOKIE, setSessionCookie, type TokenResponse } from "../_lib.ts";
 import type { IncomingMessage, ServerResponse } from "node:http";
 
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
