@@ -13,6 +13,10 @@ body {
 	min-height: 100vh;
 }
 
+#app {
+	min-height: 100cqh;
+}
+
 .container {
 	max-width: unset;
 	padding: unset;
