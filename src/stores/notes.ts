@@ -159,13 +159,13 @@ export async function updateNote(data: { id: UUID; title: string; content: strin
 	}
 }
 
-export const getNote = (id: UUID): NoteModel | undefined => {
+export function getNote(id: UUID) {
 	return store.notes.find(note => note.id === id);
-};
+}
 
-export const getNoteContent = (id: UUID): Promise<string | undefined> => {
-	return notesRepository.loadContent(id);
-};
+export async function getNoteContent(id: UUID) {
+	return await notesRepository.loadContent(id);
+}
 
 async function applyToNote(id: UUID, mutator: (note: NoteModel) => void) {
 	const note = store.notes.find(note => note.id === id);
@@ -288,15 +288,15 @@ export async function permanentlyDeleteMultiple(ids: ReadonlyArray<UUID>) {
 
 export async function purgeExpiredTrash() {
 	const cutoff = Date.now() - TRASH_RETENTION_MS;
-	const expiredIds = store.notes
-		.filter(note => {
-			if (!note.deletedAt) {
-				return false;
-			}
+	const expiredIds = store.notes.reduce((ids, note) => {
+		if (note.deletedAt) {
 			const tombstoneTime = note.deletedAt.getTime();
-			return tombstoneTime > 0 && tombstoneTime < cutoff;
-		})
-		.map(expired => expired.id);
+			if (tombstoneTime < cutoff) {
+				return ids.concat(note.id);
+			}
+		}
+		return ids;
+	}, [] as UUID[]);
 	if (expiredIds.length > 0) {
 		await permanentlyDeleteMultiple(expiredIds);
 	}
@@ -305,10 +305,15 @@ export async function purgeExpiredTrash() {
 
 function addOrUpdate(updatedNote: NoteModel) {
 	const index = store.notes.findIndex(note => note.id === updatedNote.id);
-	if (index === -1) {
-		store.notes.push(updatedNote);
-	} else {
-		store.notes.splice(index, 1, updatedNote);
+	switch (index) {
+		case -1: {
+			store.notes.push(updatedNote);
+			break;
+		}
+		default: {
+			store.notes.splice(index, 1, updatedNote);
+			break;
+		}
 	}
 	store.tags = mergeArrays(store.tags, updatedNote.tags);
 }
